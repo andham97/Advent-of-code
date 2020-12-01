@@ -1,4 +1,4 @@
-#include "io.h"
+#include "common.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,7 +6,7 @@ int line_count(const char *path)
 {
     FILE *file = fopen(path, "r");
     char c;
-    int count = 0;
+    int count = 1;
 
     while (!feof(file))
     {
@@ -39,5 +39,19 @@ void read_long_array(const char *path, long *data)
         free(line);
     }
     fclose(file);
-    return data;
+}
+
+void bubblesort(long *data, int length) {
+    int unsorted = 1;
+    while (unsorted > 0) {
+        unsorted = 0;
+        for (int i = 0; i < length - 1; i++) {
+            if (data[i] > data[i + 1]) {
+                long tmp = data[i];
+                data[i] = data[i + 1];
+                data[i + 1] = tmp;
+                unsorted++;
+            }
+        }
+    }
 }
